@@ -1,0 +1,17 @@
+version: '3'
+
+services:
+  rstudio:
+    # ビルドするDockerfileが含まれるディレクトリ
+    build: .
+    # 作成するイメージ名(任意: ユーザ名/プロジェクト名)
+    image: nononoexe/rocker-geospatial-jp
+    container_name: rstudio
+    environment:
+      TZ: Asia/Tokyo
+      PASSWORD: yourpassword
+    ports:
+      - "8787:8787"
+    # データの永続化
+    volumes:
+      - ".:/home/rstudio/workspace"
