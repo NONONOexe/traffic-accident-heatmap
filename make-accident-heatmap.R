@@ -66,7 +66,10 @@ library(tmap)
 tmap_mode("view")
 
 # 交通事故件数のレイヤを作成
-accident_counts_tm <- tm_shape(accident_counts_sf) +
+accident_counts_tm <-
+  tm_shape(
+    accident_counts_sf,
+    name = "交通事故件数") +
   tm_polygons(
     col        = "count",
     alpha      = 0.8,
@@ -78,7 +81,9 @@ accident_counts_tm <- tm_shape(accident_counts_sf) +
 # 行政区域のレイヤーの作成
 library(jpndistrict)
 cities_tm <-
-  tm_shape(jpn_cities(pref_code)) +
+  tm_shape(
+    jpn_cities(pref_code),
+    name = "行政区域") +
   tm_polygons(
     col   = "white",
     alpha = 0.5,
@@ -93,10 +98,11 @@ fatal_accidents_tm <-
     lat_dms, lon_dms,
     lat_d, lat_m, lat_s,
     lon_d, lon_m, lon_s)) |>
-  tm_shape() +
-  tm_dots(col        = "royalblue",
-          border.col = "transparent",
-          id         = "fatal_accidents")
+  tm_shape(name = "交通死亡事故地点") +
+  tm_dots(
+    col        = "royalblue",
+    border.col = "transparent",
+    id         = "fatal_accidents")
 
 map <- cities_tm + accident_counts_tm + fatal_accidents_tm
 tmap_save(map, "index.html")
