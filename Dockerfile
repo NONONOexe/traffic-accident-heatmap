@@ -18,7 +18,7 @@ RUN apt-get update && apt-get install -y \
 # ワーキングディレクトリの設定
 RUN echo "setwd(\"/home/rstudio/workspace/\")" > /home/rstudio/.Rprofile
 
-# rocker/geospatialに含まれないRPackageのインストール
+# rocker/geospatialに含まれないRパッケージのインストール
 # CRANからのインストール
 RUN install2.r -d TRUE -e -n -1 \
   celestial
